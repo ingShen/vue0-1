@@ -1,6 +1,7 @@
 # 0-1vue
 
 > A Vue.js project
+> 该项目正在编写中...
 
 ## Build Setup
 
