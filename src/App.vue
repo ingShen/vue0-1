@@ -1,25 +1,23 @@
 <template>
   <div id="app">
     <img src="./assets/logo.png">
-    <router-view></router-view>
-    <router-link :to="{name: 'applePage'}">to apple</router-link>
-    <router-link :to="{path:'banana'}">to banana</router-link>
-    <router-link :to="{path:'apple/red'}">to apple red</router-link>
+    {{ totalPrice }}
+    <apple></apple>
+    <banana></banana>
   </div>
 </template>
 
 <script>
 import HelloWorld from './components/HelloWorld'
+import Apple from './components/apple'
+import Banana from './components/banana'
 
 export default {
-  name: 'app',
-//  data (){
-//      return{
-//        a : 'apple'
-//      }
-//  },
-  components: {
-
+    components: {Apple, Banana},
+    computed: {
+      totalPrice () {
+          return this.$store.getters.getTotal
+      }
   }
 }
 </script>
