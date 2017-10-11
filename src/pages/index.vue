@@ -26,6 +26,7 @@
       </div>
     </div>
     <div class="index-right">
+      <slide-show :slides="slides" :inv="slideSpeed" @onchange="doSomething"></slide-show>
       <div class="index-board-list">
         <div
           class="index-board-item"
@@ -61,17 +62,44 @@
 </template>
 
 <script>
+  import slideShow from '../components/slideShow'
   export default {
-      created: function () {
-          this.$http.get('api/getNewsList')
-            .then((res) => {
-              this.newsList = res.data
+    components: {
+      slideShow
+    },
+    created: function () {
+      this.$http.post('api/getNewsList')
+        .then((res) => {
+          this.newsList = res.data
         }, (err) => {
           console.log(err)
         })
-      },
+    },
     data () {
       return {
+          slideSpeed: 2000,
+        slides: [
+          {
+            src: require('../assets/slideShow/pic1.jpg'),
+            title: 'xxx1',
+            href: 'detail/analysis'
+          },
+          {
+            src: require('../assets/slideShow/pic2.jpg'),
+            title: 'xxx2',
+            href: 'detail/count'
+          },
+          {
+            src: require('../assets/slideShow/pic3.jpg'),
+            title: 'xxx3',
+            href: 'http://xxx.xxx.com'
+          },
+          {
+            src: require('../assets/slideShow/pic4.jpg'),
+            title: 'xxx4',
+            href: 'detail/forecast'
+          }
+        ],
         productList: {
           pc: {
             title: 'PC产品',
@@ -119,7 +147,7 @@
             ]
           }
         },
-        newsList: [ ],
+        newsList: [],
         boardList: [
           {
             title: '开放产品',
@@ -150,6 +178,11 @@
             saleout: false
           }
         ],
+      }
+    },
+    methods: {
+      doSomething () {
+          console.log('doSomething run!')
       }
     }
   }
